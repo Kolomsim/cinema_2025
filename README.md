@@ -1,16 +1,44 @@
-# React + Vite
+# Проект на React и Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Этот проект представляет собой фронтенд-приложение, созданное с использованием React и Vite.
 
-Currently, two official plugins are available:
+## Установка и запуск
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Убедитесь, что у вас установлен Node.js (версия 16 или выше)
+2. Клонируйте репозиторий (https://github.com/ksunchikk/cinema.git)
+3. Установите зависимости:
 
-## React Compiler
+```bash
+cd cinema
+npm install
+```
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+4. Запустите проект в режиме разработки:
 
-## Expanding the ESLint configuration
+```bash
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Задачи для разработки
+
+Необходимо разработать страницу UserPage. Дизайн для этой страницы находится в папке `designs`.
+
+При разработке страницы UserPage обратите внимание на:
+
+- Соответствие предоставленному дизайну
+- Библиотеку компонентов Ant Design (https://ant.design/)
+
+## Структура проекта
+
+Основные папки:
+
+- `src/` - исходный код приложения
+- `public/` - статические файлы
+- `designs/` - макеты и дизайн-ресурсы
+
+## Скрипты
+
+- `dev` - запуск dev-сервера
+- `build` - сборка проекта
+- `preview` - предпросмотр собранного проекта
+- `lint` - проверка кода с ESLint
