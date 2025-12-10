@@ -1,23 +1,38 @@
-import { Typography, Row, Col, Statistic } from "antd";
-import { articleData, genreData } from "../../utils/mockData";
-import ArticleCard from "../../components/ArticleCard/ArticleCard";
-import GenreCard from "../../components/GenreCard/GenreCard";
-import { useState } from "react";
+import { Flex, Statistic, Typography } from "antd";
+import logo from "../../assets/Group 1.svg";
+import { articles, genres } from "../../utils/mockData";
 import "./MainPage.css";
-
-// map, filter, forEach
+import ArticleCard from "../../components/articleCard/ArticleCard";
+import CategoryPreview from "../../components/category/CategoryPreview";
+import { useEffect, useState } from "react";
+import { getArticles, getGenres } from "../../utils/requests";
 
 const MainPage = () => {
-  const [moviesCount, setMoviesCount] = useState(12345);
-  const [reviewsCount, setReviewCount] = useState(3456);
-  const data = articleData;
+  const [articles, setArticles] = useState([]);
+  const [genres, setGenres] = useState([]);
+
+  useEffect(() => {
+    getArticles().then((res) => {
+      setArticles(
+        res.data.data.map((item) => {
+          return {
+            ...item,
+            imageUrl: "https://" + item.imageUrl,
+          };
+        })
+      );
+    });
+    getGenres({ top: true }).then((res) => {
+      setGenres(res.data.data);
+    });
+  }, []);
 
   return (
     <div id="main-page">
-      <div className="logo-container">
-        <img src="logo_cinema.svg" />
+      <div className="content-main-page">
+        <img src={logo} />
       </div>
-      <div className="description-container">
+      <div className="content-main-page">
         <Typography.Text>
           Добро пожаловать в <b>CinemaBlog</b> – место, где кино становится
           страстью! Мы анализируем, обсуждаем и вдохновляемся лучшими фильмами
@@ -25,30 +40,32 @@ const MainPage = () => {
           здесь есть кино для каждого.
         </Typography.Text>
       </div>
-      <div className="articles-container">
-        <Typography.Title level={3}>Главное сегодня</Typography.Title>
-        <Row gutter={[60, 60]}>
-          {articleData.map((item) => (
-            <Col span={8}>
-              <ArticleCard title={item.title} description={item.description} />
-            </Col>
+      <div className="content-main-page">
+        <Typography.Title className="title" level={4}>
+          Главное сегодня
+        </Typography.Title>
+      </div>
+      <div className="content-main-page">
+        <Flex gap={60}>
+          {articles.map((item) => (
+            <ArticleCard item={item} />
           ))}
-        </Row>
+        </Flex>
       </div>
-      <div className="articles-container">
-        <Typography.Title level={3}>Жанры</Typography.Title>
-        <Row gutter={[60, 60]}>
-          {genreData.map((item) => (
-            <Col span={6}>
-              <GenreCard label={item.label} />
-            </Col>
-          ))}
-        </Row>
+      <div className="content-main-page">
+        <Typography.Title className="title" level={4}>
+          Жанры
+        </Typography.Title>
       </div>
-      <div className="statistic-container">
-        <Statistic title={"Фильмов в блоге"} value={moviesCount} />
-        <Statistic title={"Фильмов в блоге"} value={reviewsCount} />
+      <div className="content-main-page categories-container">
+        {genres.map((item) => (
+          <CategoryPreview item={item} />
+        ))}
       </div>
+      <Flex gap={60}>
+        <Statistic title={"Фильмы"} value={115}></Statistic>
+        <Statistic title={"Рецензии"} value={653}></Statistic>
+      </Flex>
     </div>
   );
 };

@@ -2,20 +2,20 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: white;
-}
-.header-menu {
-  width: 50%;
-}
-
-.user-container {
-  display: flex;
-  gap: 20px;
-  align-items: center;
+  padding-block: 10px;
+  border-bottom: 1px solid lightgray;
+  gap: 150px;
 }
 
-.user-name-container {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+.ant-layout-header {
+  background: #ffffff;
+}
+
+.header-title {
+  margin: 0 !important;
+}
+
+.header-text {
+  margin: 0 !important;
+  font-size: 17px;
 }

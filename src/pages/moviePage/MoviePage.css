@@ -1,0 +1,30 @@
+#movie-page {
+  padding: 90px;
+}
+
+.movie-title {
+  margin: 0 !important;
+}
+
+.light {
+  font-weight: 400 !important;
+}
+
+.movie-img {
+  width: 300px;
+}
+
+.ant-descriptions > *,
+.ant-descriptions-row,
+.ant-descriptions-row > * {
+  border: unset !important;
+  border-bottom: unset !important;
+  background: unset !important;
+}
+.ant-descriptions-item-label {
+  padding: 0 !important;
+  padding-inline-end: 36px !important;
+}
+.content-movie-container {
+  padding-block-end: 30px;
+}

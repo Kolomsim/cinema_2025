@@ -1,0 +1,15 @@
+.card-container {
+  width: 30%;
+}
+.card-img {
+  max-height: 300px;
+  min-height: 300px;
+  object-fit: cover;
+}
+
+.card-meta {
+  .ant-card-meta-title {
+    text-overflow: unset;
+    white-space: unset;
+  }
+}

@@ -1,59 +1,55 @@
-import { Input, Row, Select, Col } from "antd";
-import { moviesData } from "../../utils/mockData";
-import MovieCard from "../../components/MovieCard/MovieCard";
+import { Flex, Input, Pagination, Select } from "antd";
 import "./MoviesPage.css";
+import { moviesMock } from "../../utils/mockData";
+import MovieCard from "../../components/movieCard/MovieCard";
+import { getGenres, getMovies } from "../../utils/requests";
 import { useEffect, useState } from "react";
 
-function MoviesPage() {
-  const [tagFilter, setTagFilter] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [filtered, setFiltered] = useState(moviesData);
-
-  const genreOptions = [
-    { value: "фантастика", label: "Фантастика" },
-    { value: "драма", label: "Драма" },
-    { value: "приключения", label: "Приключения" },
-    { value: "биография", label: "Биография" },
-  ];
+const MoviesPage = () => {
+  const [genreOptions, setGenreOptions] = useState([]);
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    if (!!tagFilter.length || !!searchQuery) {
-      const result = moviesData.filter(
-        (item) =>
-          item.title.includes(searchQuery) || tagFilter.includes(item.genre)
-      );
-      setFiltered(result);
-    } else setFiltered(moviesData);
-  }, [tagFilter, searchQuery]);
+    getMovies()
+      .then((res) => {
+        setMovies(res.data.data);
+      })
+      .catch((e) => console.warn(e));
+    getGenres({ top: false })
+      .then((res) => {
+        setGenreOptions(
+          res.data.data.map((item) => {
+            return {
+              label: item.name,
+              value: item.name,
+            };
+          })
+        );
+      })
+      .catch((e) => console.warn(e));
+  }, []);
 
   return (
-    <>
-      <div className="filter-container">
-        <Input.Search
-          onSearch={(event) => {
-            setSearchQuery(event);
-          }}
-        />
+    <div id="movies-page">
+      <Flex gap={30}>
+        <Input.Search onSearch={() => {}} />
         <Select
-          options={genreOptions}
+          className="tag-select"
           mode="multiple"
-          className="genre-filter"
-          onChange={(event) => {
-            setTagFilter(event);
-          }}
+          allowClear
+          maxTagCount={2}
+          options={genreOptions}
+          onChange={() => {}}
         />
+      </Flex>
+      <div className="movies-list">
+        {movies.map((item) => (
+          <MovieCard item={item} />
+        ))}
       </div>
-      <div>
-        <Row gutter={[40, 40]}>
-          {filtered.map((item) => (
-            <Col span={8}>
-              <MovieCard title={item.title} year={item.year} />
-            </Col>
-          ))}
-        </Row>
-      </div>
-    </>
+      <Pagination showQuickJumper defaultCurrent={2} total={20} />
+    </div>
   );
-}
+};
 
 export default MoviesPage;

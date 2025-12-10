@@ -1,0 +1,34 @@
+.tag-select {
+  width: 50%;
+}
+
+#movies-page {
+  padding: 90px;
+}
+
+.movies-list {
+  display: grid;
+  grid-template-columns: 29% 29% 29%;
+  gap: 80px;
+  justify-content: space-between;
+  padding-block: 60px;
+}
+
+.title {
+  margin: 0;
+}
+
+.ant-descriptions > *,
+.ant-descriptions-row,
+.ant-descriptions-row > * {
+  border: unset !important;
+  border-bottom: unset !important;
+  background: unset !important;
+}
+.ant-descriptions-item-label {
+  padding: 0 !important;
+  padding-inline-end: 36px !important;
+}
+.content-user-container {
+  padding-block-end: 30px;
+}
